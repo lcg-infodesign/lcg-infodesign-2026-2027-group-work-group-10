@@ -17,7 +17,7 @@ header {
   align-items: center;
   padding-top: 30px;
   padding-bottom: 20px;
-  border-bottom: 2pxsolid #e9eef1;
+  border-bottom: 1px solid #e9eef1;
   margin: 0 2.78vw; /* vw per adattarlo allo schermo; primo valore per sopra e sotto, secondo per dx e sx (40px)*/
 }
 
@@ -33,6 +33,11 @@ nav {
 
 /* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
 
+h1{
+  margin-left: 2.78vw;
+  margin-right: 2.78vw;
+  margin-top: 24px;
+}
 .introduzione {
   background: #527992;
 }
