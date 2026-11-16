@@ -11,6 +11,17 @@ canvas {
   display: block;
 }
 
+#logo {
+  font-weight: 600;
+}
+
+#intro {
+position: fixed;
+bottom: 30px;
+right: 2.78vw;
+}
+
+
 header {
   display: flex;
   justify-content: space-between;
@@ -26,18 +37,27 @@ a {
   text-decoration: none;
 }
 
+header a, #inizia {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 nav {
   display: flex;
   gap: 2.78vw;
 }
 
-/* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
-
-h1{
+h1 {
   margin-left: 2.78vw;
   margin-right: 2.78vw;
   margin-top: 24px;
+  font-size: 24px;
+  font-weight: 600;
 }
+
+/* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
 .introduzione {
   background: #527992;
 }
