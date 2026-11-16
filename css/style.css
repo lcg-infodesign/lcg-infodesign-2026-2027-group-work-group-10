@@ -1,0 +1,39 @@
+html, body {
+  html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: "dm-sans", sans-serif;
+  color: #E9EEF1;
+}
+}
+
+canvas {
+  display: block;
+}
+
+/* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
+
+.introduzione{
+ background: linear-gradient(to bottom, #34617F, #284C65);
+}
+
+.insieme{
+ background: linear-gradient(to bottom, #34617F, #284C65);
+}
+
+.incidenti{
+background: linear-gradient(to bottom, #284C65, #1B364B);
+}
+
+.detail-incidente{
+background: linear-gradient(to bottom, #1B364B, #0F2131);
+}
+
+.chi-siamo{
+ background: linear-gradient(to bottom, #527992, #34617F);
+}
+
+.fonti{
+ background: linear-gradient(to bottom, #527992, #34617F);
+}
