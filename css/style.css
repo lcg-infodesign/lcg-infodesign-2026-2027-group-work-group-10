@@ -37,12 +37,20 @@ a {
   text-decoration: none;
 }
 
-header a, .avanti {
+header a, .avanti, .indietro{
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.indietro {
+  position: fixed;
+  top: 150px;
+  left: 2.78vw;
+
+}
+
 
 nav {
   display: flex;
