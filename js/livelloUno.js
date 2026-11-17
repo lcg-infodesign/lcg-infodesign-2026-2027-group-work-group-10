@@ -34,8 +34,6 @@ function draw() {
   for (let r = 0; r < 3; r++) {
     //parto da zero finché r è minore di 3 e aggiungo 1; per le 3 righe
     let y = yInizio + r * passoY; //partenza yInizio + quante righe passano * distanza tra le righe; ogni giro la riga scende di 150px
-    stroke("#e9eef1");
-    line(width * 0.1385, y, width - margine, y); //x di prtenza, altezza della riga, fino al margine dx, y di arrivo uguale a quella di partenza
     noStroke();
     textSize(17);
     text(rotte[r], margine, y + 4); //[r] richiama l'array delle rotte, posizionate a partire da margine sx un po' più in bassp
