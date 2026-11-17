@@ -5,6 +5,22 @@ let rotte = [
   "Eastern Mediterranean",
 ];
 
+let anno = [
+  "2014",
+  "2015",
+  "2016",
+  "2017",
+  "2018",
+  "2019",
+  "2020",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025",
+  "2026",
+];
+
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
@@ -37,6 +53,18 @@ function draw() {
     noStroke();
     textSize(17);
     text(rotte[r], margine, y + 4); //[r] richiama l'array delle rotte, posizionate a partire da margine sx un po' più in bassp
+
+    for (let a = 0; a < 13; a++) {
+      //parto da zero finché a è minore di 13 e aggiungo 1; per le
+      let x = map(a, 0, 12, xInizio, xFine); //distribuisce i 13 anni da xInizio a xFine
+      mioGlifo(x, y);
+    }
   }
-  mioGlifo(300, 350);
+push();
+textAlign(CENTER, CENTER);
+  for (let a = 0; a < 13; a++) {
+    let x = map(a, 0, 12, xInizio, xFine);
+    text(anno[a], x, yInizio + 3 * passoY); //x della colonna, una riga sotto l'ultima rotta
+  }
+  pop();
 }
