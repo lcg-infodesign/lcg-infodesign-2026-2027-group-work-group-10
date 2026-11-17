@@ -52,7 +52,7 @@ function draw() {
     let y = yInizio + r * passoY; //partenza yInizio + quante righe passano * distanza tra le righe; ogni giro la riga scende di 150px
     noStroke();
     textSize(17);
-    text(rotte[r], margine, y + 4); //[r] richiama l'array delle rotte, posizionate a partire da margine sx un po' più in bassp
+    text(rotte[r], margine, y + 4); //[r] richiama l'array delle rotte, posizionate a partire da margine sx un po' più in basso
 
     for (let a = 0; a < 13; a++) {
       //parto da zero finché a è minore di 13 e aggiungo 1; per le
@@ -60,8 +60,8 @@ function draw() {
       mioGlifo(x, y);
     }
   }
-push();
-textAlign(CENTER, CENTER);
+  push();
+  textAlign(CENTER, CENTER);
   for (let a = 0; a < 13; a++) {
     let x = map(a, 0, 12, xInizio, xFine);
     text(anno[a], x, yInizio + 3 * passoY); //x della colonna, una riga sotto l'ultima rotta
