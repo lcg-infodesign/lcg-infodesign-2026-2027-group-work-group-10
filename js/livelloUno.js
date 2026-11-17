@@ -30,15 +30,17 @@ async function setup() {
 
 function mioGlifo(x, y) {
   push(); //salva il tutto
-  fill(255, 0, 0);
+  fill("#060E1A");
   translate(x, y);
-  circle(0, 0, 20);
+  circle(0, 0, 50);
   pop(); //rimette tutto com'era
 }
 
 function draw() {
   clear();
   noStroke();
+  textFont("dm-sans");
+  textWeight(400);
   textSize(12);
   fill("#e9eef1");
   let margine = width * 0.0278; //margine sx e dx
