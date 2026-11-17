@@ -4,7 +4,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: "dm-sans", sans-serif;
-  color: #e9eef1;
+  color: #e9eef5;
 }
 
 canvas {
@@ -28,12 +28,12 @@ header {
   align-items: center;
   padding-top: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #e9eef1;
+  border-bottom: 1px solid #e9eef5;
   margin: 0 2.78vw; /* vw per adattarlo allo schermo; primo valore per sopra e sotto, secondo per dx e sx (40px)*/
 }
 
 a {
-  color: #e9eef1;
+  color: #e9eef5;
   text-decoration: none;
 }
 
@@ -59,25 +59,25 @@ h1 {
 
 /* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
 .introduzione {
-  background: linear-gradient(to bottom, #34617F, #284C65);
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
 }
 
 .insieme {
-  background: linear-gradient(to bottom, #34617F, #284C65);
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
 }
 
 .incidenti {
-  background:linear-gradient(to bottom, #3A6595, #1C3657);
+  background:linear-gradient(to bottom, #2B5080, #1C3657);
 }
 
 .detail-incidente {
-  background: linear-gradient(to bottom, #1C3657, #0E1C30);
+  background: linear-gradient(to bottom, #1C3657, #050B15);
 }
 
 .chi-siamo {
-  background: linear-gradient(to bottom, #34617F, #284C65);
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
 }
 
 .fonti {
-  background: linear-gradient(to bottom, #34617F, #284C65);
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
 }
