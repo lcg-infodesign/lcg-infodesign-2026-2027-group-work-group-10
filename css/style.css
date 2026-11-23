@@ -173,3 +173,125 @@ h1 {
   font-size: 16px;
   font-weight: 500;
 }
+
+/* pagina about us */
+.chi-siamo main {
+  margin: 0 2.78vw;
+}
+
+/* titolone */
+.chi-siamo h1 {
+  margin: 64px 0 8px;
+  font-size: 58px;
+  font-weight: 700;
+}
+
+/* sottotitolo */
+.chi-siamo .sottotitolo {
+  color: #bcc9d8;
+}
+
+/* 6 cerchi in fila*/
+.persone {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22vh;
+}
+
+.persona {
+  width: 13.9vw;
+  height: 13.9vw;
+  border-radius: 50%;
+  background: #1c3657;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+/* pagina metodo*/
+
+.fonti main {
+  margin: 0 2.78vw;
+  padding-bottom: 64px;
+}
+
+.fonti h1 {
+  margin: 64px 0 8px;
+  font-size: 58px;
+  font-weight: 700;
+}
+
+.fonti .sottotitolo {
+  color: #bcc9d8;
+}
+
+.colonne {
+  display: flex;
+  gap: 2.78vw;
+  margin-top: 64px;
+}
+
+.colonna {
+  flex: 1;
+  border-top: 1px solid #8aa3c2;
+  padding-top: 16px;
+}
+
+.colonna p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.colonna .etichetta {
+font-size: 11px;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: #bcc9d8;
+}
+
+.colonna .piccolo {
+font-size: 13px;
+}
+
+.sottolineato {
+  text-decoration: underline;
+}
+
+.riga-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pallino {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.anello {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1.5px solid;
+}
+
+.rosso {
+  background: #de4c55;
+}
+
+.chiaro {
+  background: #bcc9d8;
+}
+
+.bordo-rosso {
+  border-color: #de4c55;
+}
+
+.bordo-chiaro {
+  border-color: #bcc9d8
+}
