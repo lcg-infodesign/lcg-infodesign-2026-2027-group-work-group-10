@@ -91,8 +91,7 @@ function draw() {
   text("LOCATION OF INCIDENT", m, yCampi);
   text("CAUSE OF DEATH", m + 375 * k, yCampi);
   text("COUNTRY OF ORIGIN", m + 631 * k, yCampi);
-  //text("SOURCE QUALITY", m + 1006 * k, yCampi); //però questa la togliamo forse!!!!!!!!
-
+ 
   let luogo = riga.getString("location of incident");
 
   if (luogo == "") {
@@ -129,7 +128,6 @@ function draw() {
     340 * k,
     height - yCampi - 43 * s,
   );
-  //text(qualitaFonte)
 }
 
 function mousePressed() {
