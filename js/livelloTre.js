@@ -62,7 +62,7 @@ function draw() {
   fill(grigio);
   textSize(38 * s);
   text(paese, m, altezzaHeader + 110 * s);
-  
+
   let totale = riga.getNum("total number of dead and missing");
   textAlign(RIGHT, TOP);
   fill(bianco);
@@ -83,6 +83,42 @@ function draw() {
   fill(bianco);
   textSize(22 * s);
   text("= 1 person", m + 24 * s, yLegenda);
+
+  let yCampi = height - 193 * s;
+  let k = (width - 2 * m) / 1360;
+  fill(grigio);
+  textSize(max(12 * s, 10));
+  text("LOCATION OF INCIDENT", m, yCampi);
+  text("CAUSE OF DEATH", m + 375 * k, yCampi);
+  text("COUNTRY OF ORIGIN", m + 631 * k, yCampi);
+  //text("SOURCE QUALITY", m + 1006 * k, yCampi); //però questa la togliamo forse!!!!!!!!
+
+  let luogo = riga.getString("location of incident");
+
+  if (luogo == "") {
+    luogo = "Not recorded";
+  }
+  fill(bianco);
+  textSize(max(15 * s, 12));
+  textLeading(max(21.7 * s, 17));
+  text(luogo, m, yCampi + 23 * s, 340 * k, height - yCampi - 43 * s);
+
+  let causa = riga.getString("cause of death");
+  if (causa == "") {
+    causa = "Not recorded";
+  }
+  fill(bianco);
+  textSize(max(15 * s, 12));
+  textLeading(max(21.7 * s, 17));
+  text(conSpazi(causa), m + 375 * k, yCampi + 23 * s, 220 * k, height - yCampi - 43 * s);
+
+
+  let origine = riga.getString("country of origin");
+  if (origine == "") {
+    origine = "Not recorded";
+  }
+  text(conSpazi(origine), m + 631 * k, yCampi + 23 * s, 340 * k, height - yCampi - 43 * s);
+  //text(qualitaFonte)
 }
 
 function mousePressed() {
@@ -93,5 +129,15 @@ function mousePressed() {
       "&anno=" +
       riga.getString("incident year");
     window.location.href = myURL;
+
   }
 }
+
+    function conSpazi(testo) {
+        let pezzi = testo.split(",");
+        let risultato = pezzi[0];
+        for (let i = 1; i < pezzi.length; i++){
+            risultato = risultato + ", " + pezzi[i];
+        }
+        return risultato;
+    }
