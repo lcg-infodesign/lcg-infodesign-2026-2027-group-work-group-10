@@ -77,11 +77,11 @@ function draw() {
   }
   textAlign(LEFT, TOP);
 
-  let yLegenda = altezzaHeader + 248 * s;
+  let yLegenda = altezzaHeader + 230 * s;
   fill(grigio);
-  circle(m + 5.4 * s, yLegenda + 10 * s, 10.8 * s);
+  circle(m + 5.8 * s, yLegenda + 7 * s, 10.8 * s);
   fill(bianco);
-  textSize(22 * s);
+  textSize(16 * s);
   text("= 1 person", m + 24 * s, yLegenda);
 
   let yCampi = height - 193 * s;
@@ -110,14 +110,25 @@ function draw() {
   fill(bianco);
   textSize(max(15 * s, 12));
   textLeading(max(21.7 * s, 17));
-  text(conSpazi(causa), m + 375 * k, yCampi + 23 * s, 220 * k, height - yCampi - 43 * s);
-
+  text(
+    conSpazi(causa),
+    m + 375 * k,
+    yCampi + 23 * s,
+    220 * k,
+    height - yCampi - 43 * s,
+  );
 
   let origine = riga.getString("country of origin");
   if (origine == "") {
     origine = "Not recorded";
   }
-  text(conSpazi(origine), m + 631 * k, yCampi + 23 * s, 340 * k, height - yCampi - 43 * s);
+  text(
+    conSpazi(origine),
+    m + 631 * k,
+    yCampi + 23 * s,
+    340 * k,
+    height - yCampi - 43 * s,
+  );
   //text(qualitaFonte)
 }
 
@@ -129,15 +140,14 @@ function mousePressed() {
       "&anno=" +
       riga.getString("incident year");
     window.location.href = myURL;
-
   }
 }
 
-    function conSpazi(testo) {
-        let pezzi = testo.split(",");
-        let risultato = pezzi[0];
-        for (let i = 1; i < pezzi.length; i++){
-            risultato = risultato + ", " + pezzi[i];
-        }
-        return risultato;
-    }
+function conSpazi(testo) {
+  let pezzi = testo.split(",");
+  let risultato = pezzi[0];
+  for (let i = 1; i < pezzi.length; i++) {
+    risultato = risultato + ", " + pezzi[i];
+  }
+  return risultato;
+}
