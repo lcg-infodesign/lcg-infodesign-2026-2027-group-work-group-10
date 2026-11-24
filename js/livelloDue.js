@@ -26,6 +26,10 @@ let diametro_piccolo = 3; // 1 persona
 let area_grande = 121; // spazio occupato da un pallino grande
 let area_piccolo = 30; // spazio occupato da un pallino piccolo
 
+let altezza_menu = 65; // altezza dell'header nel CSS
+let passo = 11; // distanza tra i pallini
+let bolla_sopra = -1; // -1 = nessuna
+
 // colori
 let bianco = "#e9eef5";
 let chiaro = "#bcc9d8";
@@ -36,7 +40,7 @@ let rosso = "#de4c55"; // confirmed dead
 let bordo = "#5d7699"; // bordo dei bottoni degli anni
 
 async function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - altezza_menu);
   angleMode(DEGREES);
   data = await loadTable("assets/mediterraneo.csv", ",", "header"); 
 
@@ -63,6 +67,97 @@ async function setup() {
       anno = richiesto; // se è valido lo memorizzo come anno corrente
     }
   }
+
+  // versione provvisoria
+  for (let i = 0; i < data.getRowCount(); i++) {
+    let riga = data.getRow(i);
+    if (riga.getString("migration route") == rotta) {
+      incidentiRotta.push(riga);
+      if (numero(riga, "incident year") == anno) {
+        bolle.push(nuovaBolla(riga));
+      }
+    }
+  }
+  disponiBolle();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight - altezza_menu);
+  disponiBolle();
+}
+
+// cerchio vuoto = 10 persone, punto = 1 persona
+function nuovaBolla(riga) {
+  let totale = numero(riga, "total number of dead and missing");
+  let morti = min(numero(riga, "number of dead"), totale); // in 3 righe i dispersi sono negativi
+  let dispersi = totale - morti;
+
+  let pallini = [];
+  aggiungiPallini(pallini, floor(morti / 10), true, true);
+  aggiungiPallini(pallini, morti % 10, false, true);
+  aggiungiPallini(pallini, floor(dispersi / 10), true, false);
+  aggiungiPallini(pallini, dispersi % 10, false, false);
+
+  let colonne = max(1, ceil(sqrt(pallini.length)));
+  let righe = ceil(pallini.length / colonne);
+  for (let i = 0; i < pallini.length; i++) {
+    pallini[i].x = (i % colonne - (colonne - 1) / 2) * passo;
+    pallini[i].y = (floor(i / colonne) - (righe - 1) / 2) * passo;
+  }
+
+  return {
+    id: riga.getString("main id"),
+    pallini: pallini,
+    raggioBase: (colonne * passo) / 2 * 1.42 + 4,
+    x: 0, y: 0, raggio: 0, s: 1,
+  };
+}
+
+// cella vuota = 0
+function numero(riga, colonna) {
+  let valore = riga.getString(colonna);
+  if (valore == "") {
+    return 0;
+  }
+  return int(valore);
+}
+
+function aggiungiPallini(pallini, quanti, grande, morto) {
+  for (let i = 0; i < quanti; i++) {
+    pallini.push({ grande: grande, morto: morto, x: 0, y: 0 });
+  }
+}
+
+// in fila, a capo a fine riga; se non ci stanno, più piccole
+function disponiBolle() {
+  let sy = scalaY();
+  let alto = 170 * sy;
+  let basso = height - 30 * sy;
+  let s = scala();
+  for (let prova = 0; prova < 30; prova++) {
+    let x = margine();
+    let y = alto;
+    let altezzaRiga = 0;
+    for (let i = 0; i < bolle.length; i++) {
+      let b = bolle[i];
+      let d = b.raggioBase * 2 * s;
+      if (x + d > width - margine()) {
+        x = margine();
+        y = y + altezzaRiga + 8 * s;
+        altezzaRiga = 0;
+      }
+      b.s = s;
+      b.raggio = d / 2;
+      b.x = x + d / 2;
+      b.y = y + d / 2 - y_centro * sy; // y dalla linea centrale
+      x = x + d + 8 * s;
+      altezzaRiga = max(altezzaRiga, d);
+    }
+    if (y + altezzaRiga <= basso) {
+      return;
+    }
+    s = s * 0.9;
+  }
 }
 
 function draw() {
@@ -74,7 +169,54 @@ function draw() {
     return;
   }
 
+  disegnaTitolo();
   disegnaBolle();
+
+  // dopo le bolle, così sta davanti
+  bolla_sopra = bollaSotto();
+  if (bolla_sopra >= 0) {
+    let b = bolle[bolla_sopra];
+    noFill();
+    stroke(bianco);
+    strokeWeight(1.5);
+    circle(b.x, y_centro * scalaY() + b.y, b.raggio * 2 + 6);
+    cursor(HAND);
+  } else {
+    cursor(ARROW);
+  }
+}
+
+function disegnaTitolo() {
+  let s = scala();
+  noStroke();
+  fill(bianco);
+  textSize(58 * s);
+  textWeight(700);
+  text(rotta, margine(), 40 * s);
+  fill(chiaro);
+  textSize(38 * s);
+  textWeight(400);
+  text("Incidents in " + anno, margine(), 108 * s);
+}
+
+// -1 se nessuna
+function bollaSotto() {
+  for (let i = 0; i < bolle.length; i++) {
+    let b = bolle[i];
+    let dx = mouseX - b.x;
+    let dy = mouseY - (y_centro * scalaY() + b.y);
+    if (dx * dx + dy * dy < b.raggio * b.raggio) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function mousePressed() {
+  let i = bollaSotto();
+  if (i >= 0) {
+    window.location.href = "livello-3.html?id=" + bolle[i].id;
+  }
 }
 function scala() {
   return min(width / 1440, height / 900);
