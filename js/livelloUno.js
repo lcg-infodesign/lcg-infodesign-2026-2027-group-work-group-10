@@ -5,9 +5,10 @@ let rotteMaiuscolo = ["WESTERN MEDITERRANEAN", "CENTRAL MEDITERRANEAN", "EASTERN
 let rotteBrevi = ["Western", "Central", "Eastern"];
 let anni = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
-// finestra di 1440 x 900 px
-let yEtichette = [264, 429, 595]; // nome di ogni rotta
-let yBasi = [394, 561, 727]; // a che altezza sta la linea che tiene i cerchi scuri di ogni rotta
+// layout come nel livello 3
+let altezzaHeader = 15; // spazio tra menu e testi (uguale al livello 3)
+let yEtichette = []; // altezza del nome di ogni rotta (la calcolo in setup)
+let yBasi = []; // altezza della linea che tiene i cerchi di ogni rotta (la calcolo in setup)
 
 // colori
 let bianco = "#e9eef5";
@@ -21,7 +22,6 @@ let spazioCerchi = 2.5; // spazio vuoto tra un cerchio e l'altro
 
 // misure della pagina in modo che queste si adattino alla finestra che NB puo sempre essewre più piccola o più grande
 let scala; // quanto ingrandire o rimpicciolire testi e cerchi
-let scalaAltezze; // quanto in altezza 
 let margineLati; // spazio vuoto a sinistra e a destra della pagina
 let larghezzaAnno; // spazio orizzontale occupato da ogni anno
 
@@ -50,11 +50,13 @@ let maxVittime = 0; // incidente più grande (per la legenda)
 let diametroMinimo = 2.5; // cerchio di un incidente con 1 vittima
 let diametroMassimo = 26; // cerchio dell'incidente più grande (1022 vittime)
 
+let altezzaMenu = 65; // altezza dell'header nel CSS (uguale al livello 3)
+
 let rottaSelezionata = -1; // rotta se ci passo sotto col mouse (-1 = nessuna)
 let annoSelezionato = -1; // anno sotto il mouse (-1 = nessuno)
 
 async function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - altezzaMenu); // come nel livello 3: tolgo l'altezza del menu, così la pagina non scorre
   data = await loadTable("assets/mediterraneo.csv", ",", "header");
 
   // adatto le misure del mockup alla finestra
@@ -62,7 +64,15 @@ async function setup() {
   if (height / 900 < scala) {
     scala = height / 900;
   }
-  scalaAltezze = height / 900;
+
+  // posizioni in altezza, come nel livello 3: il titolo parte dal menu, anni e legenda dal fondo della pagina
+  let yInizio = altezzaHeader + 175 * scala; // sotto il titolo
+  let yFine = height - 125 * scala; // sopra gli anni
+  let altezzaRiga = (yFine - yInizio) / 3; // spazio di ogni rotta
+  for (let rotta = 0; rotta < 3; rotta++) {
+    yEtichette[rotta] = yInizio + rotta * altezzaRiga;
+    yBasi[rotta] = yInizio + (rotta + 1) * altezzaRiga - 10 * scala;
+  }
   margineLati = width * 0.0278;
   larghezzaAnno = (width - 2 * margineLati) / 13;
 
@@ -229,8 +239,8 @@ function trovaCella() {
     
     let anno = int((mouseX - margineLati) / larghezzaAnno); //x capire in quale colonna si trova il mouse
     for (let rotta = 0; rotta < 3; rotta++) { //x capire quale rotta sono sopra col mouse
-      let alto = (yEtichette[rotta] + 20) * scalaAltezze;
-      let basso = (yBasi[rotta] + 10) * scalaAltezze;
+      let alto = yEtichette[rotta] + 20 * scala;
+      let basso = yBasi[rotta] + 10 * scala;
 
       if (mouseY > alto && mouseY < basso && totIncidenti[rotta * 13 + anno] > 0) {
         rottaSelezionata = rotta;
@@ -267,21 +277,21 @@ function disegnaTitolo() {
   fill(bianco);
   textSize(58 * scala);
   textWeight(700);
-  text("Mediterranean", margineLati, 107 * scalaAltezze);
+  text("Mediterranean", margineLati, altezzaHeader + 51 * scala);
   fill(chiaro);
-  textSize(42 * scala);
+  textSize(38 * scala);
   textWeight(500);
-  text("2014–2026", margineLati, 176 * scalaAltezze);
+  text("2014–2026", margineLati, altezzaHeader + 110 * scala);
 
   push();
   textAlign(RIGHT, TOP);
   fill(bianco);
   textSize(92 * scala);
   textWeight(700);
-  scriviNumero(totaleVittime, "", width - margineLati, 97 * scalaAltezze);
+  scriviNumero(totaleVittime, "", width - margineLati, altezzaHeader + 41 * scala);
   textSize(22 * scala);
   textWeight(400);
-  text("victims", width - margineLati, 196 * scalaAltezze);
+  text("victims", width - margineLati, altezzaHeader + 122 * scala);
   pop();
 }
 
@@ -291,10 +301,10 @@ function disegnaFlussi() {
     textSize(12 * scala);
     textWeight(500);
     fill(bianco);
-    text(rotteMaiuscolo[rotta], margineLati, yEtichette[rotta] * scalaAltezze);
+    text(rotteMaiuscolo[rotta], margineLati, yEtichette[rotta]);
     textWeight(400);
     fill(chiaro);
-    scriviNumero(totaliRotta[rotta], " victims", margineLati + 175 * scala, yEtichette[rotta] * scalaAltezze);
+    scriviNumero(totaliRotta[rotta], " victims", margineLati + 175 * scala, yEtichette[rotta]);
   }
 
   // un cerchio per incidente; rossi quelli della rotta e dell'anno sotto il mouse
@@ -305,7 +315,7 @@ function disegnaFlussi() {
     } else {
       fill(bluNotte);
     }
-    circle(xCerchio[i], yBasi[rottaIncidente[i]] * scalaAltezze + yCerchio[i], raggioCerchio[i] * 2);
+    circle(xCerchio[i], yBasi[rottaIncidente[i]] + yCerchio[i], raggioCerchio[i] * 2);
   }
 }
 
@@ -320,36 +330,40 @@ function disegnaAnni() {
     } else {
       fill(chiaro);
     }
-    text(anni[anno], margineLati + anno * larghezzaAnno + larghezzaAnno / 2, 784 * scalaAltezze);
+    text(anni[anno], margineLati + anno * larghezzaAnno + larghezzaAnno / 2, height - 95 * scala);
   }
   pop();
 }
 
 function disegnaLegenda() {
-  let y = 861 * scalaAltezze;
+  let y = height - 30 * scala; // centro della riga della legenda, in fondo alla pagina
+
+  push();
+  textAlign(LEFT, CENTER);
   textSize(15 * scala);
   textWeight(400);
 
-  let x = margineLati; // la legenda parte dal margine sinistro
-  fill(bluNotte);
-  circle(x + 6 * scala, y + 10 * scala, 11 * scala);
+  // a sinistra: cosa vuol dire un cerchio
   fill(bianco);
-  text("Each circle is one incident, sized by its victims", x + 19 * scala, y);
+  text("Each circle is one incident. The bigger the circle, the more victims.", margineLati, y);
 
-  // scala dei cerchi
-  push();
-  textAlign(RIGHT, TOP);
-  let destra = width - margineLati;
-  scriviNumero(maxVittime, " victims", destra, y);
-  let rGrande = (diametroMassimo * scala) / 2;
-  let rPiccolo = (diametroMinimo * scala) / 2;
-  let xGrande = destra - 105 * scala - rGrande; // 105 = spazio per "1,022 victims"
-  fill(bluNotte);
-  circle(xGrande, y + 10 * scala, rGrande * 2);
-  fill(bianco);
-  text("1", xGrande - rGrande - 10 * scala, y);
-  fill(bluNotte);
-  circle(xGrande - rGrande - 30 * scala, y + 10 * scala, rPiccolo * 2);
+  // a destra: tre cerchi di esempio con il loro numero di vittime
+  let esempi = [1, 100, 1022]; // vittime dei cerchi di esempio
+  let spazi = [85, 115, 130]; // spazio orizzontale di ogni esempio (cerchio + testo)
+  let x = width - margineLati - 330 * scala; // dove inizia il primo esempio
+
+  for (let n = 0; n < 3; n++) {
+    let diametro = map(sqrt(esempi[n]), 1, sqrt(maxVittime), diametroMinimo, diametroMassimo) * scala;
+    fill(bluNotte);
+    circle(x + diametro / 2, y, diametro); // stesso cerchio del disegno
+    fill(bianco);
+    if (esempi[n] == 1) {
+      text("1 victim", x + diametro + 8 * scala, y);
+    } else {
+      scriviNumero(esempi[n], " victims", x + diametro + 8 * scala, y);
+    }
+    x = x + spazi[n] * scala;
+  }
   pop();
 }
 
@@ -367,9 +381,9 @@ function disegnaFinestra() {
   if (x > width - margineLati - larghezza) {
     x = width - margineLati - larghezza; // non esce a destra
   }
-  let y = yBasi[rottaSelezionata] * scalaAltezze - 133 * scalaAltezze - altezza;
+  let y = yBasi[rottaSelezionata] - 133 * scala - altezza;
   if (rottaSelezionata == 0) {
-    y = yBasi[rottaSelezionata] * scalaAltezze + 20 * scalaAltezze;
+    y = yBasi[rottaSelezionata] + 20 * scala;
   }
 
   noStroke();
@@ -404,7 +418,7 @@ function disegnaFinestra() {
     text(totIncidenti[cella] + " incidents", xTesto, y + 103 * scala);
   }
 
-  // invito ad aprire il livello 2, sottolineato con un rettangolo alto 1 px
+  // livello 2
   text("Open " + rotteBrevi[rottaSelezionata] + " " + anni[annoSelezionato], xTesto, y + 130 * scala);
   rect(xTesto, y + 147 * scala, 110 * scala, 1);
 }
