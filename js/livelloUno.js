@@ -4,10 +4,10 @@ let rotte = ["Western Mediterranean", "Central Mediterranean", "Eastern Mediterr
 let rotteMaiuscolo = ["WESTERN MEDITERRANEAN", "CENTRAL MEDITERRANEAN", "EASTERN MEDITERRANEAN"];
 let anni = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
-// layout come nel livello 3
-let altezzaHeader = 15; // spazio tra menu e testi (uguale al livello 3)
-let yEtichette = []; // altezza del nome di ogni rotta (la calcolo in setup)
-let yBasi = []; // altezza della linea che tiene i cerchi di ogni rotta (la calcolo in setup)
+// layout 
+let altezzaHeader = 15; 
+let yEtichette = [];
+let yBasi = []; 
 
 // colori
 let bianco = "#e9eef5";
@@ -63,14 +63,14 @@ async function setup() {
     scala = height / 900;
   }
 
-  // posizioni in altezza, come nel livello 3: il titolo parte dal menu, anni e legenda dal fondo della pagina
-  let yInizio = altezzaHeader + 175 * scala; // subito sotto il titolo: qui va il nome della prima rotta
-  let yFine = height - 125 * scala; // sopra gli anni: qui finisce la base dell'ultima rotta
-  let altezzaOnda = 115 * scala; // spazio tra il nome di una rotta e la sua base (ci sta l'onda)
-  let spazioTraRotte = (yFine - yInizio - 3 * altezzaOnda) / 2; // lo spazio che avanza va tra una rotta e l'altra
+  //layout
+  let yInizio = altezzaHeader + 175 * scala; 
+  let yFine = height - 125 * scala; 
+  let altezzaOnda = 115 * scala; 
+  let spazioTraRotte = (yFine - yInizio - 3 * altezzaOnda) / 2; 
   for (let rotta = 0; rotta < 3; rotta++) {
     yEtichette[rotta] = yInizio + rotta * (altezzaOnda + spazioTraRotte); // nome della rotta
-    yBasi[rotta] = yEtichette[rotta] + altezzaOnda; // base della sua onda, subito sotto
+    yBasi[rotta] = yEtichette[rotta] + altezzaOnda; // base della sua onda
   }
   margineLati = width * 0.0278;
   larghezzaAnno = (width - 2 * margineLati) / 13;
@@ -189,7 +189,7 @@ function cadiNellAnno(i) {
 
   // provo tutte le x dell'anno
   for (let x = xSinistra; x <= xDestra; x = x + 1) {
-    // a. fin dove scende? parto dalla base e, se tocca un cerchio già messo, mi appoggio sopra di lui
+
     let y = -raggio;
     for (let n = 0; n < quanti[cella]; n++) {
       let altro = lista[cella * maxPerCella + n];
@@ -343,14 +343,14 @@ function disegnaLegenda() {
   textSize(15 * scala);
   textWeight(400);
 
-  // a sinistra: cosa vuol dire un cerchio
+  // cosa vuol dire un cerchio
   fill(bianco);
   text("Each circle is one incident. The bigger the circle, the more victims.", margineLati, y);
 
-  // a destra: tre cerchi di esempio con il loro numero di vittime
+  // cerchi di esempio con il loro numero di vittime
   let esempi = [1, 100, 1022]; // vittime dei cerchi di esempio
-  let spazi = [85, 115, 130]; // spazio orizzontale di ogni esempio (cerchio + testo)
-  let x = width - margineLati - 330 * scala; // dove inizia il primo esempio
+  let spazi = [85, 115, 130]; 
+  let x = width - margineLati - 330 * scala; 
 
   for (let n = 0; n < 3; n++) {
     let diametro = map(sqrt(esempi[n]), 1, sqrt(maxVittime), diametroMinimo, diametroMassimo) * scala;
