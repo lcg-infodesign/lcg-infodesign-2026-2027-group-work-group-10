@@ -299,13 +299,14 @@ function disegnaTitolo() {
 function disegnaFlussi() {
   // nome e totale di ogni rotta
   for (let rotta = 0; rotta < 3; rotta++) {
-    textSize(12 * scala);
+    textSize(16 * scala); // nome della rotta più grande (prima era 12)
     textWeight(500);
     fill(bianco);
     text(rotteMaiuscolo[rotta], margineLati, yEtichette[rotta]);
+    textSize(14 * scala);
     textWeight(400);
     fill(chiaro);
-    scriviNumero(totaliRotta[rotta], " victims", margineLati + 175 * scala, yEtichette[rotta]);
+    scriviNumero(totaliRotta[rotta], " victims", margineLati + 240 * scala, yEtichette[rotta] + 2 * scala); // più a destra, perché il nome è più lungo
   }
 
   // un cerchio per incidente; rossi quelli della rotta e dell'anno sotto il mouse
