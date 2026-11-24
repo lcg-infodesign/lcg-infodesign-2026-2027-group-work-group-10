@@ -66,12 +66,13 @@ async function setup() {
   }
 
   // posizioni in altezza, come nel livello 3: il titolo parte dal menu, anni e legenda dal fondo della pagina
-  let yInizio = altezzaHeader + 175 * scala; // sotto il titolo
-  let yFine = height - 125 * scala; // sopra gli anni
-  let altezzaRiga = (yFine - yInizio) / 3; // spazio di ogni rotta
+  let yInizio = altezzaHeader + 175 * scala; // subito sotto il titolo: qui va il nome della prima rotta
+  let yFine = height - 125 * scala; // sopra gli anni: qui finisce la base dell'ultima rotta
+  let altezzaOnda = 115 * scala; // spazio tra il nome di una rotta e la sua base (ci sta l'onda)
+  let spazioTraRotte = (yFine - yInizio - 3 * altezzaOnda) / 2; // lo spazio che avanza va tra una rotta e l'altra
   for (let rotta = 0; rotta < 3; rotta++) {
-    yEtichette[rotta] = yInizio + rotta * altezzaRiga;
-    yBasi[rotta] = yInizio + (rotta + 1) * altezzaRiga - 10 * scala;
+    yEtichette[rotta] = yInizio + rotta * (altezzaOnda + spazioTraRotte); // nome della rotta
+    yBasi[rotta] = yEtichette[rotta] + altezzaOnda; // base della sua onda, subito sotto
   }
   margineLati = width * 0.0278;
   larghezzaAnno = (width - 2 * margineLati) / 13;
