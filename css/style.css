@@ -1,0 +1,297 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: "dm-sans", sans-serif;
+  color: #e9eef5;
+}
+
+canvas {
+  display: block;
+}
+
+#logo {
+  font-weight: 600;
+}
+
+.avanti {
+position: fixed;
+bottom: 30px;
+right: 2.78vw;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e9eef5;
+  margin: 0 2.78vw; /* vw per adattarlo allo schermo; primo valore per sopra e sotto, secondo per dx e sx (40px)*/
+}
+
+a {
+  color: #e9eef5;
+  text-decoration: none;
+}
+
+header a, .avanti, .indietro{
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.indietro {
+  position: fixed;
+  top: 150px;
+  left: 2.78vw;
+
+}
+
+
+nav {
+  display: flex;
+  gap: 2.78vw;
+}
+
+h1 {
+  margin-left: 2.78vw;
+  margin-right: 2.78vw;
+  margin-top: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* per richiamare la classe, con cui abbiamo nominato ogni pagina html si mette .nomeclasse */
+.introduzione {
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
+}
+
+.insieme {
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
+}
+
+.incidenti {
+  background:linear-gradient(to bottom, #2B5080, #1C3657);
+}
+
+.detail-incidente {
+  background: linear-gradient(to bottom, #1C3657, #050B15);
+}
+
+.chi-siamo {
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
+}
+
+.fonti {
+  background: linear-gradient(to bottom, #3F71A6, #2B5080);
+}
+
+/* entrata (index.html): due schermate alte quanto la finestra, con il testo al centro */
+.schermata {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2.78vw;
+}
+
+.numero-grande {
+  margin: 0;
+  font-size: 168px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sottotitolo {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.grigio {
+  color: #bcc9d8;
+}
+
+.dettaglio {
+  margin: 30px 0 0;
+  font-size: 18px;
+  color: #bcc9d8;
+}
+
+.dettaglio span {
+  margin: 0 12px;
+}
+
+/* cerchio con la freccia che scende alla seconda schermata */
+.freccia {
+  position: absolute;
+  bottom: 86px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e9eef5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.schermata h1 {
+  margin: 0 0 44px;
+  font-size: 58px;
+  font-weight: 700;
+}
+
+.testo {
+  max-width: 840px;
+  margin: 0 0 68px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.nota {
+  max-width: 760px;
+  margin: 0 0 72px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #bcc9d8;
+}
+
+.bottone {
+  padding: 14px 32px;
+  border-radius: 24px;
+  background: #e9eef5;
+  color: #0b1626;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* pagina about us */
+.chi-siamo main {
+  margin: 0 2.78vw;
+}
+
+/* titolone */
+.chi-siamo h1 {
+  margin: 64px 0 8px;
+  font-size: 58px;
+  font-weight: 700;
+}
+
+/* sottotitolo */
+.chi-siamo .sottotitolo {
+  color: #bcc9d8;
+}
+
+/* 6 cerchi in fila*/
+.persone {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22vh;
+}
+
+.persona {
+  width: 13.9vw;
+  height: 13.9vw;
+  border-radius: 50%;
+  background: #1c3657;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+/* pagina metodo*/
+
+.fonti main {
+  margin: 0 2.78vw;
+  padding-bottom: 64px;
+}
+
+.fonti h1 {
+  margin: 64px 0 8px;
+  font-size: 58px;
+  font-weight: 700;
+}
+
+.fonti .sottotitolo {
+  color: #bcc9d8;
+}
+
+.colonne {
+  display: flex;
+  gap: 2.78vw;
+  margin-top: 64px;
+}
+
+.colonna {
+  flex: 1;
+  border-top: 1px solid #8aa3c2;
+  padding-top: 16px;
+}
+
+.colonna p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.colonna .etichetta {
+font-size: 11px;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: #bcc9d8;
+}
+
+.colonna .piccolo {
+font-size: 13px;
+}
+
+.sottolineato {
+  text-decoration: underline;
+}
+
+.riga-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pallino {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.anello {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1.5px solid;
+}
+
+.rosso {
+  background: #de4c55;
+}
+
+.chiaro {
+  background: #bcc9d8;
+}
+
+.bordo-rosso {
+  border-color: #de4c55;
+}
+
+.bordo-chiaro {
+  border-color: #bcc9d8
+}
