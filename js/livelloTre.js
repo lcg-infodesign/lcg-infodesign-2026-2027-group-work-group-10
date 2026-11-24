@@ -28,7 +28,7 @@ async function setup() {
   data = await loadTable("assets/mediterraneo.csv", ",", "header");
 
   let parametri = getURLParams();
-  let id = parametri.id || "2023.MMP0097";
+  let id = parametri.id || "2015.MMP00108";
 
   riga = data.findRow(id, "main id");
 }
