@@ -2,7 +2,6 @@ let data; // tabella del CSV
 
 let rotte = ["Western Mediterranean", "Central Mediterranean", "Eastern Mediterranean"];
 let rotteMaiuscolo = ["WESTERN MEDITERRANEAN", "CENTRAL MEDITERRANEAN", "EASTERN MEDITERRANEAN"];
-let rotteBrevi = ["Western", "Central", "Eastern"];
 let anni = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
 // layout come nel livello 3
@@ -16,7 +15,6 @@ let chiaro = "#bcc9d8";
 let scuro = "#0b1626";
 let grigioScuro = "#4a5a70";
 let bluNotte = "#18294a"; // cerchi
-let rosso = "#de4c55"; // cerchi della rotta e dell'anno quando ci passo il mouse
 
 let spazioCerchi = 2.5; // spazio vuoto tra un cerchio e l'altro 
 
@@ -141,7 +139,7 @@ function mouseClicked() {
   }
 }
 
-// ---------- posizioni dei cerchi ----------
+// POSIZIONI CERCHI
 
 // decide dove va ogni cerchio
 function disponiCerchi() {
@@ -309,11 +307,11 @@ function disegnaFlussi() {
     scriviNumero(totaliRotta[rotta], " victims", margineLati + 240 * scala, yEtichette[rotta] + 2 * scala); // più a destra, perché il nome è più lungo
   }
 
-  // un cerchio per incidente; rossi quelli della rotta e dell'anno sotto il mouse
+  // un cerchio per incidente; bianchi quelli della rotta e dell'anno sotto il mouse
   noStroke();
   for (let i = 0; i < numeroIncidenti; i++) {
     if (rottaIncidente[i] == rottaSelezionata && annoIncidente[i] == annoSelezionato) {
-      fill(rosso);
+      fill(bianco); // cerchi sotto il mouse in bianco
     } else {
       fill(bluNotte);
     }
@@ -421,6 +419,5 @@ function disegnaFinestra() {
   }
 
   // livello 2
-  text("Open " + rotteBrevi[rottaSelezionata] + " " + anni[annoSelezionato], xTesto, y + 130 * scala);
-  rect(xTesto, y + 147 * scala, 110 * scala, 1);
+  text("Click to open", xTesto, y + 130 * scala);
 }
