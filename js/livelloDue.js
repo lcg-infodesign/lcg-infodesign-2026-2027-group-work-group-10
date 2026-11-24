@@ -76,6 +76,17 @@ function draw() {
 
   disegnaBolle();
 }
+function scala() {
+  return min(width / 1440, height / 900);
+}
+
+function scalaY() {
+  return height / 900;
+}
+
+function margine() {
+  return width * 0.0278;
+}
 
 function disegnaBolle() {
     let sy = scalaY();
