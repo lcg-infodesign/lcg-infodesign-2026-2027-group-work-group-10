@@ -65,3 +65,57 @@ async function setup() {
   }
 }
 
+function draw() {
+  clear();
+  textFont("dm-sans");
+  textAlign(LEFT, TOP);
+  noStroke();
+  if (incidentiRotta.length == 0) {
+    return;
+  }
+
+  disegnaBolle();
+}
+function scala() {
+  return min(width / 1440, height / 900);
+}
+
+function scalaY() {
+  return height / 900;
+}
+
+function margine() {
+  return width * 0.0278;
+}
+
+function disegnaBolle() {
+    let sy = scalaY();
+    for (let i = 0; i < bolle.length; i++) {
+    let b = bolle[i];
+    let cy = y_centro * sy + b.y;
+    noStroke();
+    fill(blu_notte);
+    circle(b.x, cy, b.raggio * 2);
+    for (let j = 0; j < b.pallini.length; j++) {
+      disegnaPallino(b.pallini[j], b.x + b.pallini[j].x * b.s, cy + b.pallini[j].y * b.s, b.s);
+    }
+  }
+}
+
+// pallino da 10: cerchio vuoto; pallino da 1: punto pieno. rosso = confirmed dead, chiaro = assumed to be dead
+function disegnaPallino(p, x, y, s) {
+  let colore = chiaro;
+  if (p.morto) {
+    colore = rosso;
+  }
+  if (p.grande) {
+    noFill();
+    stroke(colore);
+    strokeWeight(1.1 * s);
+    circle(x, y, diametro_grande * s);
+  } else {
+    noStroke();
+    fill(colore);
+    circle(x, y, diametro_piccolo * s);
+  }
+}
